@@ -14,8 +14,20 @@
 		<td><%= group.id %></td>
 		<td><%= link_to(group.title, group_path(group) ) %></td>
 		<td><%= group.description %></td>
-		<td><%= link_to("編輯", edit_group_path(group) ) %></td>
-		<td><%= link_to("刪除", group_path(group), method: :delete, data: { confirm: "確定刪除？"} ) %></td>
+
+
+		<td>
+		<% if group.is_editable_by?(current_user) %>
+		<%= link_to("編輯", edit_group_path(group) ) %>
+		<% end %>
+		</td>
+
+		<td>
+		<% if group.is_editable_by?(current_user) %>
+		<%= link_to("刪除", group_path(group), method: :delete, data: { confirm: "確定刪除？"} ) %>
+		<% end %>
+		</td>
+
 	</tr>
 
 	<% end %>

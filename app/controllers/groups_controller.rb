@@ -13,11 +13,11 @@ class GroupsController < ApplicationController
 	end
 
 	def new
-		@group = Group.new
+		@group = current_user.groups.new
 	end
 
 	def create
-		@group = Group.new(groups_params)
+		@group = current_user.groups.new(groups_params)
 
 		if @group.save
 			flash[:notice]="新增討論區成功"
@@ -29,12 +29,12 @@ class GroupsController < ApplicationController
 	end
 
 	def edit
-		@group = Group.find(params[:id])
+		@group = current_user.groups.find(params[:id])
 
 	end
 
 	def update
-		@group = Group.find(params[:id])
+		@group = current_user.groups.find(params[:id])
 		if @group.update(groups_params)
 			flash[:notice]="討論區更新成功"
 			redirect_to groups_path
@@ -46,7 +46,7 @@ class GroupsController < ApplicationController
 	end
 
 	def destroy
-		@group = Group.find(params[:id])
+		@group = current_user.groups.find(params[:id])
 		@group.destroy
 		flash[:notice]="討論區已刪除"
 		redirect_to groups_path

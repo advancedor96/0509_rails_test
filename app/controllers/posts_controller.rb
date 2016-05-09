@@ -2,12 +2,17 @@ class PostsController < ApplicationController
 	before_action :find_group
 	before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
 
+
+
+	
 	def new
 		@post = @group.posts.new
 	end
 
 	def create
 		@post = @group.posts.build(posts_params)
+		@post.user_id = current_user.id
+
 
 		if @post.save
 			flash[:notice]="文章新增成功"
