@@ -20,6 +20,8 @@
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Hi, <%= current_user.name %></a>
           <ul class="dropdown-menu">
+            <li><%= link_to("我參加的討論區", account_groups_path ) %></li>
+            <li><%= link_to("我發表的文章", account_posts_path ) %></li>
             <li><%= link_to("帳號設定", edit_user_registration_path ) %></li>
             <li><%= link_to("登出", destroy_user_session_path, method: :delete) %></li>
           </ul>

@@ -1,3 +1,6 @@
+<%= link_to("加入討論區", join_group_path(@group), method: :post, class: "btn btn-info") %>
+<%= link_to("退出討論區", quit_group_path(@group), method: :post, class: "btn btn-info") %>
+
 <%= link_to("新增文章", new_group_post_path(@group), class: "btn btn-warning pull-right") %>
 
 <h2><%= @group.title %></h2>

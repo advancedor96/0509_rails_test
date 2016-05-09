@@ -1,6 +1,33 @@
 class GroupsController < ApplicationController
 	before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
 
+	def join
+		
+		@group = Group.find(params[:id])
+		if !current_user.is_member_of(@group)
+			current_user.join!(@group)
+			flash[:notice]="加入討論區"
+		else
+			flash[:notice]="你已經加入了"
+		end
+
+		redirect_to groups_path
+
+	end
+
+	def quit
+		@group = Group.find(params[:id])
+		if current_user.is_member_of(@group)
+			current_user.quit!(@group)
+			flash[:notice]="退出討論區成功"
+		else
+			flash[:notice]="你本來就不在討論區裡面了"
+		end
+
+		redirect_to groups_path
+	end
+
+
 	def index
 		@groups = Group.all
 	end

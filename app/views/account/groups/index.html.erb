@@ -1,0 +1,34 @@
+<h2>我參與的討論區</h2>
+
+<table class="table table-hover">
+	<tr>
+		<th>#</th>
+		<th>Title</th>
+		<th>Description</th>
+		<th>編輯</th>
+		<th>刪除</th>
+	</tr>
+
+	<% @groups.each do |group| %>
+	<tr>
+		<td><%= group.id %></td>
+		<td><%= link_to(group.title, group_path(group) ) %></td>
+		<td><%= group.description %></td>
+
+
+		<td>
+		<% if group.is_editable_by?(current_user) %>
+		<%= link_to("編輯", edit_group_path(group) ) %>
+		<% end %>
+		</td>
+
+		<td>
+		<% if group.is_editable_by?(current_user) %>
+		<%= link_to("刪除", group_path(group), method: :delete, data: { confirm: "確定刪除？"} ) %>
+		<% end %>
+		</td>
+
+	</tr>
+
+	<% end %>
+</table>
